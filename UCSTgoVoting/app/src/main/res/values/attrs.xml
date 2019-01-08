@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <!-- {@deprecated Use civ_circlebackground_color instead.} -->
+        <attr name="civ_fill_color" format="color" />
+        <attr name="civ_circle_background_color" format="color" />
+    </declare-styleable>
+
+    <style name="positionIndicator">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">66sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">normal</item>
+    </style>
+
+    <style name="positionIndicatorCurrent" parent="positionIndicator">
+        <!--<item name="android:textColor">#da7c80b8</item>-->
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+</resources>

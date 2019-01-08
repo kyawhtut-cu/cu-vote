@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">UCS Tgo Voting</string>
+    <string name="action_clear_voting">Clear Voting</string>
+    <string name="tv_king">King</string>
+    <string name="tv_queen">Queen</string>
+    <string name="tv_attractive_boy">Prince</string>
+    <string name="tv_attractive_girl">Princess</string>
+    <string name="tv_innocence_boy">Innocence Boy</string>
+    <string name="tv_innocence_girl">Innocence Girl</string>
+
+    <string name="fragment_home">UCS Tgo Voting</string>
+    <string name="fragment_photo">Gallery</string>
+    <string name="fragment_selection_list_king">@string/tv_king<!--Selection--></string>
+    <string name="fragment_selection_list_queen">@string/tv_queen<!--Selection--></string>
+    <string name="fragment_selection_list_attractive_boy">@string/tv_attractive_boy<!--Selection--></string>
+    <string name="fragment_selection_list_attractive_girl">@string/tv_attractive_girl<!--Selection--></string>
+    <string name="fragment_selection_list_innocence_boy">@string/tv_innocence_boy<!--Selection--></string>
+    <string name="fragment_selection_list_innocence_girl">@string/tv_innocence_girl<!--Selection--></string>
+    <string name="fragment_qr_title">QR</string>
+
+    <string name="voting_dialog_title">Vote ပေးမှာသေချာပါသလား။</string>
+    <string name="selection_ask_msg">&lt;font color="#2195f2"&gt;%s&lt;/font&gt; ကို &lt;font color="#2195f2"&gt;%s&lt;/font&gt; အဖြစ် Vote ပေးမှာသေချာပါသလား။</string>
+    <string name="voting_dialog_positive">သေချာပါသည်</string>
+    <string name="voting_dialog_negative">မလုပ်တော့ပါ</string>
+    <string name="header_text">UCSTgo Header Logo</string>
+    <string name="qr_code_text">QR Code</string>
+    <string name="share_to_text">Share to</string>
+    <string name="save_text">Save</string>
+    <string name="connection_error">Connection error. Please try again.</string>
+    <string name="re_connect">Connect</string>
+    <string name="tv_ok">OK</string>
+    <string name="tv_cancel">Cancel</string>
+    <string name="action_about_us">About</string>
+    <string name="voting_url">https://voting.kyawhtut.com/</string>
+    <string name="developer">Kyaw Htut</string>
+    <string name="libraries">Libraries</string>
+    <string name="report_bugs">Report Bugs</string>
+
+    <string-array name="library_list">
+        <item>OkHttp</item>
+        <item>Retrofit</item>
+        <item>RxJava: Reactive Extensions for the JVM</item>
+        <item>RxAndroid: Reactive Extensions for Android</item>
+        <item>Butter Knife</item>
+        <item>Glide</item>
+        <item>Timber</item>
+        <item>Android Architecture Components</item>
+        <item>ZXing</item>
+        <item>DotProgressBar</item>
+        <item>BlurDialogFragment</item>
+        <item>Custom Activity On Crash library</item>
+        <item>DiscreteScrollView</item>
+    </string-array>
+
+    <string-array name="label_for_selection">
+        <item>@string/tv_king</item>
+        <item>@string/tv_queen</item>
+        <item>@string/tv_attractive_boy</item>
+        <item>@string/tv_attractive_girl</item>
+        <item>@string/tv_innocence_boy</item>
+        <item>@string/tv_innocence_girl</item>
+    </string-array>
+</resources>
