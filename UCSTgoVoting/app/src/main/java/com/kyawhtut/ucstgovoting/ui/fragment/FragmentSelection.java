@@ -101,7 +101,7 @@ public class FragmentSelection extends BaseFragment {
                 bundle.putString("title", data.name);
                 bundle.putString("selection_id", data.selection_id);
                 ((HomeActivity) getActivity()).changeFrameLayout(
-                        new PhotoFragment(),
+                        new FragmentPhoto(),
                         getStringResource(R.string.fragment_photo),
                         bundle
                 );
@@ -116,7 +116,7 @@ public class FragmentSelection extends BaseFragment {
 
             @Override
             public void onDialogShow(String url) {
-                dialog = new PhotoPreviewDialogFragment().newInstance(
+                dialog = new DialogPhotoPreviewFragment().newInstance(
                         32,
                         4,
                         false,

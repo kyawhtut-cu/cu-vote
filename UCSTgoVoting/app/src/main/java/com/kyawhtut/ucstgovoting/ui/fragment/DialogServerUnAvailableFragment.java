@@ -8,7 +8,7 @@ import com.kyawhtut.ucstgovoting.utils.fonts.FontUtils;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ServerUnAvailable extends DialogFragmentBlur {
+public class DialogServerUnAvailableFragment extends DialogFragmentBlur {
 
     @BindView(R.id.tv_message)
     TextView mTvMessage;

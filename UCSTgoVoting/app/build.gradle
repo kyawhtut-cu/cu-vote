@@ -6,8 +6,8 @@ android {
         applicationId "com.kyawhtut.ucstgovoting"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 3
-        versionName "1.1"
+        versionCode 6
+        versionName "1.3"
         testInstrumentationRunner "android.support.choose_selection_card.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         buildConfigField "String", "API_KEY", Api_Key
@@ -75,4 +75,7 @@ dependencies {
 
     //DiscreteScrollView
     implementation 'com.yarolegovich:discrete-scrollview:1.4.9'
+
+    //photo view
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 }

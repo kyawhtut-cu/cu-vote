@@ -1,10 +1,6 @@
 package com.kyawhtut.ucstgovoting.ui.fragment;
 
 import android.arch.lifecycle.LiveData;
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,6 +17,7 @@ import com.kyawhtut.ucstgovoting.adapter.SelectionRvAdapter;
 import com.kyawhtut.ucstgovoting.adapter.clicklistener.DefaultItemClickListenerCallBack;
 import com.kyawhtut.ucstgovoting.adapter.viewholders.SelectionViewHolder;
 import com.kyawhtut.ucstgovoting.database.db_vo.Selection;
+import com.kyawhtut.ucstgovoting.ui.activity.AboutActivity;
 import com.kyawhtut.ucstgovoting.ui.activity.HomeActivity;
 import com.kyawhtut.ucstgovoting.ui.view.ItemsCountView;
 import com.kyawhtut.ucstgovoting.utils.GlideApp;
@@ -74,7 +71,7 @@ public class FragmentSelectionList extends BaseFragment {
 
             @Override
             public void onDialogShow(String url) {
-                dialog = new PhotoPreviewDialogFragment().newInstance(
+                dialog = new DialogPhotoPreviewFragment().newInstance(
                         32,
                         4,
                         false,
@@ -90,7 +87,7 @@ public class FragmentSelectionList extends BaseFragment {
                 bundle.putString("title", data.name);
                 bundle.putString("selection_id", data.selection_id);
                 ((HomeActivity) getActivity()).changeFrameLayout(
-                        new PhotoFragment(),
+                        new FragmentPhoto(),
                         getStringResource(R.string.fragment_photo),
                         bundle
                 );
@@ -117,7 +114,7 @@ public class FragmentSelectionList extends BaseFragment {
 
             @Override
             public void onClickFacebook(Selection data, int position) {
-                goToFacebook(data.fbProfile);
+                startActivity(AboutActivity.getOpenFacebookIntent(getContext(), data.fbProfile));
             }
         });
 
@@ -159,20 +156,6 @@ public class FragmentSelectionList extends BaseFragment {
                 .placeholder(R.drawable.ucst_logo)
                 .fitCenter()
                 .into(mEcBgSwitcherElement);
-    }
-
-    private void goToFacebook(String url) {
-        Uri uri = Uri.parse("https://www.facebook.com/" + url);
-        try {
-            ApplicationInfo applicationInfo = getContext().getPackageManager().getApplicationInfo("com.facebook.katana", 0);
-            if (applicationInfo.enabled) {
-                //fb://facewebmodal/f?href=" + "https://www.facebook.com/
-                uri = Uri.parse("fb://facewebmodal/f?href=" + "https://www.facebook.com/" + url);
-            }
-        } catch (PackageManager.NameNotFoundException ignored) {
-        }
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
     }
 
     private void bindData() {

@@ -33,7 +33,7 @@ import timber.log.Timber;
  * Simple fragment with blur effect behind.
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class QRDialogFragment extends DialogFragmentBlur {
+public class DialogQRFragment extends DialogFragmentBlur {
 
     private SelectionUtil mSelectionUtil;
 

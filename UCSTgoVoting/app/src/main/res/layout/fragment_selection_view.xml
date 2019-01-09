@@ -7,6 +7,18 @@
     android:orientation="vertical"
     tools:context="com.kyawhtut.ucstgovoting.ui.fragment.FragmentSelection">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ucst_logo" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foreground="@drawable/background_gradient" />
+
     <com.yarolegovich.discretescrollview.DiscreteScrollView
         android:id="@+id/selection_view_rv"
         android:layout_width="0dp"

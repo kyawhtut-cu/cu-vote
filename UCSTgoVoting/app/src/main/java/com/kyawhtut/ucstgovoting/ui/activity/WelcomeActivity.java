@@ -20,7 +20,7 @@ import com.kyawhtut.ucstgovoting.database.AppDatabase;
 import com.kyawhtut.ucstgovoting.database.db_vo.Selection;
 import com.kyawhtut.ucstgovoting.model.VotingModel;
 import com.kyawhtut.ucstgovoting.ui.fragment.DialogFragmentBlur;
-import com.kyawhtut.ucstgovoting.ui.fragment.ServerUnAvailable;
+import com.kyawhtut.ucstgovoting.ui.fragment.DialogServerUnAvailableFragment;
 import com.kyawhtut.ucstgovoting.utils.NetworkUtils;
 
 import java.util.ArrayList;
@@ -72,7 +72,7 @@ public class WelcomeActivity extends AppCompatActivity {
         mConnectionError.setVisibility(View.GONE);
         if (!NetworkUtils.isOnline(this)) {
             mConnectionError.setVisibility(View.VISIBLE);
-            new ServerUnAvailable().newInstance(
+            new DialogServerUnAvailableFragment().newInstance(
                     16,
                     4,
                     false,
@@ -109,7 +109,7 @@ public class WelcomeActivity extends AppCompatActivity {
                                     finish();
                                     startActivity(HomeActivity.getIntent(WelcomeActivity.this));
                                 } else {
-                                    new ServerUnAvailable().newInstance(
+                                    new DialogServerUnAvailableFragment().newInstance(
                                             32,
                                             4,
                                             false,
@@ -124,7 +124,7 @@ public class WelcomeActivity extends AppCompatActivity {
                                 }
                             }, throwable -> {
                                 Timber.e(throwable);
-                                new ServerUnAvailable().newInstance(
+                                new DialogServerUnAvailableFragment().newInstance(
                                         16,
                                         4,
                                         false,

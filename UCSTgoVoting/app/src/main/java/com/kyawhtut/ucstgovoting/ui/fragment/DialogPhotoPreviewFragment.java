@@ -14,7 +14,7 @@ import butterknife.BindView;
  * Simple fragment with blur effect behind.
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class PhotoPreviewDialogFragment extends DialogFragmentBlur {
+public class DialogPhotoPreviewFragment extends DialogFragmentBlur {
 
 
     @BindView(R.id.preview_image)

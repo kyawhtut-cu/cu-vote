@@ -24,10 +24,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kyawhtut.ucstgovoting.R;
 import com.kyawhtut.ucstgovoting.database.db_vo.Selection;
+import com.kyawhtut.ucstgovoting.ui.fragment.DialogQRFragment;
 import com.kyawhtut.ucstgovoting.ui.fragment.FragmentSelection;
 import com.kyawhtut.ucstgovoting.ui.fragment.FragmentSelectionList;
-import com.kyawhtut.ucstgovoting.ui.fragment.QRDialogFragment;
-import com.kyawhtut.ucstgovoting.ui.fragment.VotingConfirmDialog;
+import com.kyawhtut.ucstgovoting.ui.fragment.DialogVotingConfirmFragment;
 import com.kyawhtut.ucstgovoting.utils.DateUtils;
 import com.kyawhtut.ucstgovoting.utils.SelectionUtil;
 import com.kyawhtut.ucstgovoting.utils.fonts.FontUtils;
@@ -86,7 +86,7 @@ public class HomeActivity extends BaseActivity {
 
     @OnClick(R.id.fab_finish)
     public void onClickFab(View view) {
-        new QRDialogFragment().newInstance(
+        new DialogQRFragment().newInstance(
                 16,
                 4,
                 false,
@@ -126,7 +126,7 @@ public class HomeActivity extends BaseActivity {
                     tag.equals(getStringResource(R.string.fragment_selection_list_innocence_boy)) ||
                     tag.equals(getStringResource(R.string.fragment_selection_list_innocence_girl))) {
                 if (((FragmentSelectionList) getSupportFragmentManager().findFragmentById(R.id.content_frame)).isSelected) {
-                    new VotingConfirmDialog().setListener(new VotingConfirmDialog.DialogButtonClickListener() {
+                    new DialogVotingConfirmFragment().setListener(new DialogVotingConfirmFragment.DialogButtonClickListener() {
                         @Override
                         public void onClickOk(DialogInterface dialog) {
                             String key = getSupportActionBar().getTitle().toString();

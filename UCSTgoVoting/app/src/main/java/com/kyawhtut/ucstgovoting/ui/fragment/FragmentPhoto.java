@@ -17,7 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class PhotoFragment extends BaseFragment {
+public class FragmentPhoto extends BaseFragment {
 
     @BindView(R.id.photo_view_pager)
     ViewPager mPhotoViewPager;
@@ -45,7 +45,7 @@ public class PhotoFragment extends BaseFragment {
         List<String> photo = new Gson().fromJson(selection_id, new TypeToken<List<String>>() {
         }.getType());
         for (String s : photo) {
-            PhotoViewFragment fragment = new PhotoViewFragment();
+            FragmentPhotoView fragment = new FragmentPhotoView();
             Bundle bundle = new Bundle();
             bundle.putString("photo_url", s);
             fragment.setArguments(bundle);

@@ -12,7 +12,7 @@ import com.kyawhtut.ucstgovoting.utils.Utils;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class VotingConfirmDialog extends DialogFragmentBlur {
+public class DialogVotingConfirmFragment extends DialogFragmentBlur {
 
     private String mDialogMessage;
     private String mSelectionPhoto;
@@ -47,7 +47,7 @@ public class VotingConfirmDialog extends DialogFragmentBlur {
         mTvMessage.setText(Html.fromHtml(mDialogMessage));
     }
 
-    public VotingConfirmDialog setListener(DialogButtonClickListener mListener) {
+    public DialogVotingConfirmFragment setListener(DialogButtonClickListener mListener) {
         this.mListener = mListener;
         return this;
     }

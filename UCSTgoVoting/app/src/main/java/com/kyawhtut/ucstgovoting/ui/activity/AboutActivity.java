@@ -2,7 +2,6 @@ package com.kyawhtut.ucstgovoting.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -19,7 +18,6 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.kyawhtut.ucstgovoting.R;
-import com.kyawhtut.ucstgovoting.ui.view.CircleImageView;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,15 +28,24 @@ import butterknife.OnClick;
 
 public class AboutActivity extends AppCompatActivity {
 
+    @BindView(R.id.version_tv)
+    TextView mVersionTv;
+
     public static Intent getIntent(Context ctx) {
         return new Intent(ctx, AboutActivity.class);
     }
 
-    @BindView(R.id.app_logo)
-    CircleImageView mAppLogo;
-
-    @BindView(R.id.version_tv)
-    TextView mVersionTv;
+    public static Intent getOpenFacebookIntent(Context context, String fbId) {
+        try {
+            context.getPackageManager()
+                    .getPackageInfo("com.facebook.katana", 0);
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(String.format("fb://profile/%s", fbId)));
+        } catch (Exception e) {
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(String.format("https://www.facebook.com/profile.php?id=,%s", fbId)));
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,17 +91,7 @@ public class AboutActivity extends AppCompatActivity {
 
     @OnClick(R.id.developer_fb)
     public void onClickDeveloperFb() {
-        Uri uri = Uri.parse("https://www.facebook.com/kyawhtut.cu");
-        try {
-            ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo("com.facebook.katana", 0);
-            if (applicationInfo.enabled) {
-                //fb://facewebmodal/f?href=" + "https://www.facebook.com/
-                uri = Uri.parse("fb://facewebmodal/f?href=" + "https://www.facebook.com/kyawhtut.cu");
-            }
-        } catch (PackageManager.NameNotFoundException ignored) {
-        }
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+        startActivity(getOpenFacebookIntent(this, "100008526678537"));
     }
 
     @OnClick(R.id.developer_report)

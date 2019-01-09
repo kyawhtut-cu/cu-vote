@@ -8,7 +8,7 @@ import retrofit2.http.Path;
 
 public interface SelectionApi {
 
-    @POST("v1.api/getAllSelectionList/{api_key}")
+    @POST("v2.api/getAllSelectionList/{api_key}")
     Single<SelectionResponse> getServerStatus(
             @Path("api_key") String api_key
     );

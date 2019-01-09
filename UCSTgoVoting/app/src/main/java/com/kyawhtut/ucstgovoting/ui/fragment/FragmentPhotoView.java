@@ -10,6 +10,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.github.silvestrpredko.dotprogressbar.DotProgressBar;
 import com.kyawhtut.ucstgovoting.R;
 import com.kyawhtut.ucstgovoting.ui.view.TouchImageView;
@@ -19,10 +20,10 @@ import com.kyawhtut.ucstgovoting.utils.Utils;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class PhotoViewFragment extends BaseFragment {
+public class FragmentPhotoView extends BaseFragment {
 
     @BindView(R.id.photo_view)
-    TouchImageView mPhotoView;
+    PhotoView mPhotoView;
 
     @BindView(R.id.item_refresh)
     ImageView mItemRefresh;
@@ -37,18 +38,16 @@ public class PhotoViewFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
 
         mPhotoUrl = getArguments().getString("photo_url");
-
         loadPhoto();
 
     }
 
     @OnClick(R.id.item_refresh)
-    public void onClickItemRefresh(View view) {
+    public void onClickItemRefresh() {
         loadPhoto();
     }
 
     private void loadPhoto() {
-        mItemRefresh.setVisibility(View.GONE);
         mDotProgressBar.setVisibility(View.VISIBLE);
         GlideApp.with(getContext())
                 .asBitmap()
