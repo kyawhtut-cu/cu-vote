@@ -8,17 +8,17 @@ Project ၂ ခု ပါပါတယ်။ တစ်ခုက ကျောင�
 
 အသုံး ပြုထားတဲ့ နည်းပညာ တွေကတော့
 
-RxJava
-RxRetrofit
-Android Architecture Component(Room)
-Barcode Scanner
-ZXing(QR Generator)
-Timber
-Gson Converter
-Butterknife
-OKHttp
-Glide
-Dot Progressbar
-Blur Dialog Fragment
-Custom Crash Library
-Discrete Scroll
+RxJava<br>
+RxRetrofit<br>
+Android Architecture Component(Room)<br>
+Barcode Scanner<br>
+ZXing(QR Generator)<br>
+Timber<br>
+Gson Converter<br>
+Butterknife<br>
+OKHttp<br>
+Glide<br>
+Dot Progressbar<br>
+Blur Dialog Fragment<br>
+Custom Crash Library<br>
+Discrete Scroll<br>
