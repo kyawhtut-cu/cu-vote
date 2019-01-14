@@ -25,7 +25,9 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import shortbread.Shortcut;
 
+@Shortcut(id = "about", rank = 1, icon = R.drawable.ic_info_outline_primary_color, shortLabel = "About")
 public class AboutActivity extends AppCompatActivity {
 
     @BindView(R.id.version_tv)

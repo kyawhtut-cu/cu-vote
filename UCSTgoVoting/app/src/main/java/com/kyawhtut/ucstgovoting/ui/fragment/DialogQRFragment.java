@@ -91,7 +91,7 @@ public class DialogQRFragment extends DialogFragmentBlur {
     }
 
     @OnClick(R.id.share)
-    public void onClickShare(View view) {
+    public void onClickShare(final View view) {
         ((HomeActivity) getActivity()).shareQR(getBitmap(), new PermissionListener() {
             @Override
             public void onError(String error) {

@@ -58,6 +58,7 @@ public class SelectionViewHolder extends BaseViewHolder<Selection> {
     @BindView(R.id.selection_img)
     ImageView mSelectionImg;
 
+    private List<String> photo;
     private String mCurrentPhoto = "";
 
     public SelectionViewHolder(@NonNull View itemView, DefaultItemClickListener<Selection> mDefaultItemClickListener) {
@@ -71,7 +72,7 @@ public class SelectionViewHolder extends BaseViewHolder<Selection> {
         super.bind(data);
         mSelectionName.setText(FontUtils.getConvertedString(data.name));
         mSelectionClass.setText(data.class_name);
-        List<String> photo = new Gson().fromJson(data.photo_col, new TypeToken<List<String>>() {
+        photo = new Gson().fromJson(data.photo_col, new TypeToken<List<String>>() {
         }.getType());
         if (photo.size() > 0) {
             mCurrentPhoto = photo.get(0);
@@ -89,19 +90,15 @@ public class SelectionViewHolder extends BaseViewHolder<Selection> {
 
         mRefreshImg.setOnClickListener(v -> loadPhoto(photo.get(0)));
 
-        mSelectionImg.setOnClickListener(v -> {
-            mDefaultItemClickListener.onClickPhoto(
-                    mData,
-                    getAdapterPosition()
-            );
-        });
+        mSelectionImg.setOnClickListener(v -> mDefaultItemClickListener.onClickPhoto(
+                mData,
+                getAdapterPosition()
+        ));
 
-        mSelectionFb.setOnClickListener(v -> {
-            mDefaultItemClickListener.onClickFacebook(
-                    mData,
-                    getAdapterPosition()
-            );
-        });
+        mSelectionFb.setOnClickListener(v -> mDefaultItemClickListener.onClickFacebook(
+                mData,
+                getAdapterPosition()
+        ));
 
         mSelectionLike.setOnClickListener(v -> {
             mDefaultItemClickListener.onClickFavourite(

@@ -23,23 +23,18 @@ import java.util.List;
 import butterknife.BindArray;
 import butterknife.BindView;
 import io.reactivex.disposables.CompositeDisposable;
-import timber.log.Timber;
 
 public class FragmentSelection extends BaseFragment {
 
     @BindView(R.id.selection_view_rv)
     DiscreteScrollView mSelectionViewRv;
-
-    private ChooseSelectionRvAdapter mAdapter;
-    private List<Selection> mSelectionList = new ArrayList<>();
-    private DialogFragmentBlur dialog;
-
     @BindArray(R.array.label_for_selection)
     String[] mLabelForSelection;
-
-    private Bundle mBundle = new Bundle();
+    private ChooseSelectionRvAdapter mAdapter;
+    private List<Selection> mSelectionList = new ArrayList<>();
 
     private CompositeDisposable mCompositeDisposable;
+    private DefaultItemClickListenerCallBack<Selection> mListener;
 
     @Override
     protected int getLayout() {
@@ -49,6 +44,11 @@ public class FragmentSelection extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    public FragmentSelection addListener(DefaultItemClickListenerCallBack<Selection> listener) {
+        this.mListener = listener;
+        return this;
     }
 
     @Override
@@ -61,71 +61,7 @@ public class FragmentSelection extends BaseFragment {
         ((HomeActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ((HomeActivity) getActivity()).getSupportActionBar().show();
 
-        mAdapter = new ChooseSelectionRvAdapter(getContext(), new DefaultItemClickListenerCallBack<Selection>() {
-            @Override
-            public void onClickItem(Selection data, int position) {
-                Timber.i("Position : %s", position);
-                if (data.photo == null) {
-                    switch (position) {
-                        case 0:
-                            mBundle.putString("title", getStringResource(R.string.fragment_selection_list_king));
-                            ((HomeActivity) getActivity()).changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_king), mBundle);
-                            break;
-                        case 1:
-                            mBundle.putString("title", getStringResource(R.string.fragment_selection_list_queen));
-                            ((HomeActivity) getActivity()).changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_queen), mBundle);
-                            break;
-                        case 2:
-                            mBundle.putString("title", getStringResource(R.string.fragment_selection_list_attractive_boy));
-                            ((HomeActivity) getActivity()).changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_attractive_boy), mBundle);
-                            break;
-                        case 3:
-                            mBundle.putString("title", getStringResource(R.string.fragment_selection_list_attractive_girl));
-                            ((HomeActivity) getActivity()).changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_attractive_girl), mBundle);
-                            break;
-                        case 4:
-                            mBundle.putString("title", getStringResource(R.string.fragment_selection_list_innocence_boy));
-                            ((HomeActivity) getActivity()).changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_innocence_boy), mBundle);
-                            break;
-                        case 5:
-                            mBundle.putString("title", getStringResource(R.string.fragment_selection_list_innocence_girl));
-                            ((HomeActivity) getActivity()).changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_innocence_girl), mBundle);
-                            break;
-                    }
-                }
-            }
-
-            @Override
-            public void onClickPhoto(Selection data, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putString("title", data.name);
-                bundle.putString("selection_id", data.selection_id);
-                ((HomeActivity) getActivity()).changeFrameLayout(
-                        new FragmentPhoto(),
-                        getStringResource(R.string.fragment_photo),
-                        bundle
-                );
-            }
-
-            @Override
-            public void onDialogDismiss() {
-                if (dialog != null) {
-                    dialog.dismiss();
-                }
-            }
-
-            @Override
-            public void onDialogShow(String url) {
-                dialog = new DialogPhotoPreviewFragment().newInstance(
-                        32,
-                        4,
-                        false,
-                        false,
-                        url
-                );
-                dialog.show(getActivity().getFragmentManager(), "");
-            }
-        });
+        mAdapter = new ChooseSelectionRvAdapter(getContext(), mListener);
 
         mSelectionViewRv.setOrientation(DSVOrientation.VERTICAL);
         mSelectionViewRv.setAdapter(mAdapter);

@@ -35,6 +35,12 @@
     <string name="developer">Kyaw Htut</string>
     <string name="libraries">Libraries</string>
     <string name="report_bugs">Report Bugs</string>
+    <string name="selection_detail">Selection Detail</string>
+    <string name="selelction_facebook">ဖေ့စ်ဘွတ် အကောင့် </string>
+    <string name="selection_information">အခန်း - %s\nလိင်အမျိုးအစား - %s\nမဲအရေအတွက်(၁) - %s\nမဲအရေအတွက်(၂) - %s\nမဲအရေအတွက်(၃) - %s</string>
+    <string name="selection_empty">တစ်ခုခုမှားယွင်းနေပါသည်။</string>
+    <string name="try_again">ပြန်ကြိုးစားမည်</string>
+    <string name="selection_data_loading">ခေတ္တခနစောင့်ဆိုင်းပေးပါခင်ဗျာ။</string>
 
     <string-array name="library_list">
         <item>OkHttp</item>
@@ -50,6 +56,7 @@
         <item>BlurDialogFragment</item>
         <item>Custom Activity On Crash library</item>
         <item>DiscreteScrollView</item>
+        <item>Shortbread</item>
     </string-array>
 
     <string-array name="label_for_selection">
@@ -59,5 +66,23 @@
         <item>@string/tv_attractive_girl</item>
         <item>@string/tv_innocence_boy</item>
         <item>@string/tv_innocence_girl</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>ယောင်္ကျားလေး</item>
+        <item>မိန်းကလေး</item>
+    </string-array>
+
+    <string-array name="mm_text">
+        <item>၀</item>
+        <item>၁</item>
+        <item>၂</item>
+        <item>၃</item>
+        <item>၄</item>
+        <item>၅</item>
+        <item>၆</item>
+        <item>၇</item>
+        <item>၈</item>
+        <item>၉</item>
     </string-array>
 </resources>

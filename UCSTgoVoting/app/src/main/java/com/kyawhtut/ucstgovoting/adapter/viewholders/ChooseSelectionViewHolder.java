@@ -30,6 +30,8 @@ public class ChooseSelectionViewHolder extends BaseViewHolder<Selection> {
     @BindView(R.id.selection_img)
     ImageView mSelectionImg;
 
+    private List<String> photo;
+
     public ChooseSelectionViewHolder(@NonNull View itemView, DefaultItemClickListener<Selection> mDefaultItemClickListener) {
         super(itemView, mDefaultItemClickListener);
     }
@@ -39,7 +41,7 @@ public class ChooseSelectionViewHolder extends BaseViewHolder<Selection> {
     public void bind(Selection data) {
         super.bind(data);
         mSelectionName.setText(FontUtils.getConvertedString(data.name));
-        List<String> photo = new Gson().fromJson(data.photo_col, new TypeToken<List<String>>() {
+        photo = new Gson().fromJson(data.photo_col, new TypeToken<List<String>>() {
         }.getType());
         if (photo != null && photo.size() > 0)
             loadPhoto(photo.get(0));

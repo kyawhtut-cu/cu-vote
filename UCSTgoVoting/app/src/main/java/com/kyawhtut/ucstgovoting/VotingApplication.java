@@ -4,6 +4,7 @@ import android.app.Application;
 import android.support.v7.app.AppCompatDelegate;
 
 import cat.ereza.customactivityoncrash.config.CaocConfig;
+import shortbread.Shortbread;
 import timber.log.Timber;
 
 public class VotingApplication extends Application {
@@ -14,6 +15,7 @@ public class VotingApplication extends Application {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
+        Shortbread.create(this);
         CaocConfig.Builder.create()
                 .showErrorDetails(BuildConfig.DEBUG)
                 .apply();

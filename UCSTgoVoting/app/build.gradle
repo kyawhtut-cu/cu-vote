@@ -78,4 +78,8 @@ dependencies {
 
     //photo view
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+
+    //shortcut
+    implementation 'com.github.matthiasrobbers:shortbread:1.0.2'
+    annotationProcessor 'com.github.matthiasrobbers:shortbread-compiler:1.0.2'
 }

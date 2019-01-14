@@ -18,16 +18,19 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kyawhtut.ucstgovoting.R;
+import com.kyawhtut.ucstgovoting.adapter.clicklistener.DefaultItemClickListenerCallBack;
 import com.kyawhtut.ucstgovoting.database.db_vo.Selection;
+import com.kyawhtut.ucstgovoting.ui.fragment.DialogFragmentBlur;
+import com.kyawhtut.ucstgovoting.ui.fragment.DialogPhotoPreviewFragment;
 import com.kyawhtut.ucstgovoting.ui.fragment.DialogQRFragment;
+import com.kyawhtut.ucstgovoting.ui.fragment.DialogVotingConfirmFragment;
+import com.kyawhtut.ucstgovoting.ui.fragment.FragmentPhoto;
 import com.kyawhtut.ucstgovoting.ui.fragment.FragmentSelection;
 import com.kyawhtut.ucstgovoting.ui.fragment.FragmentSelectionList;
-import com.kyawhtut.ucstgovoting.ui.fragment.DialogVotingConfirmFragment;
 import com.kyawhtut.ucstgovoting.utils.DateUtils;
 import com.kyawhtut.ucstgovoting.utils.SelectionUtil;
 import com.kyawhtut.ucstgovoting.utils.fonts.FontUtils;
@@ -41,39 +44,97 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import shortbread.Shortcut;
 import timber.log.Timber;
 
 public class HomeActivity extends BaseActivity {
+
+    public static final int PERMISSION_ACCESS_FILE_READ_WRITE_SAVE = 0x10;
+    public static final int PERMISSION_ACCESS_FILE_READ_WRITE_SHARE = 0x11;
+    public String mLastSelectedId;
+    @BindView(R.id.fab_finish)
+    FloatingActionButton mFabFinish;
+    private String mDialogMessage;
+    private String mSelectionPhoto;
+    private Bitmap mBitmap;
+    private PermissionListener mPermissionListener;
+    private Bundle mBundle = new Bundle();
+
+    private DialogFragmentBlur mBlurDialog;
 
     public static Intent getIntent(Context context) {
         return new Intent(context, HomeActivity.class);
     }
 
-    Bundle bundle = new Bundle();
-
-    private String mDialogMessage;
-    private String mSelectionPhoto;
-    public String mSelectionId;
-
-    @BindView(R.id.fab_finish)
-    FloatingActionButton mFabFinish;
-
-    public static final int PERMISSION_ACCESS_FILE_READ_WRITE_SAVE = 0x10;
-    public static final int PERMISSION_ACCESS_FILE_READ_WRITE_SHARE = 0x11;
-    private Bitmap mBitmap;
-    private PermissionListener mPermissionListener;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        bundle.putString("title", getStringResource(R.string.fragment_home));
+        mBundle.putString("title", getStringResource(R.string.fragment_home));
         changeFrameLayout(
-                new FragmentSelection(),
+                getFragmentSelection(),
                 getStringResource(R.string.fragment_home),
-                bundle
+                mBundle
         );
         hideFab();
+    }
+
+    private FragmentSelection getFragmentSelection() {
+        return new FragmentSelection().addListener(new DefaultItemClickListenerCallBack<Selection>() {
+            @Override
+            public void onClickPhoto(Selection data, int position) {
+                previewPhoto(data.selection_id);
+            }
+
+            @Override
+            public void onClickItem(Selection data, int position) {
+                if (data.photo == null) {
+                    switch (position) {
+                        case 0:
+                            kingClick();
+                            break;
+                        case 1:
+                            queenClick();
+                            break;
+                        case 2:
+                            mBundle.putString("title", getStringResource(R.string.fragment_selection_list_attractive_boy));
+                            changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_attractive_boy), mBundle);
+                            break;
+                        case 3:
+                            mBundle.putString("title", getStringResource(R.string.fragment_selection_list_attractive_girl));
+                            changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_attractive_girl), mBundle);
+                            break;
+                        case 4:
+                            mBundle.putString("title", getStringResource(R.string.fragment_selection_list_innocence_boy));
+                            changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_innocence_boy), mBundle);
+                            break;
+                        case 5:
+                            mBundle.putString("title", getStringResource(R.string.fragment_selection_list_innocence_girl));
+                            changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_innocence_girl), mBundle);
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onDialogShow(String url) {
+                mBlurDialog = new DialogPhotoPreviewFragment().newInstance(
+                        32,
+                        4,
+                        false,
+                        false,
+                        url
+                );
+                mBlurDialog.show(getFragmentManager(), "");
+            }
+
+            @Override
+            public void onDialogDismiss() {
+                if (mBlurDialog != null) {
+                    mBlurDialog.dismiss();
+                }
+            }
+        });
     }
 
     public void hideFab() {
@@ -85,7 +146,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     @OnClick(R.id.fab_finish)
-    public void onClickFab(View view) {
+    public void onClickFab() {
         new DialogQRFragment().newInstance(
                 16,
                 4,
@@ -143,15 +204,15 @@ public class HomeActivity extends BaseActivity {
                             } else if (key.equals(getStringResource(R.string.fragment_selection_list_innocence_girl))) {
                                 key = SelectionUtil.INNOCENCE_GIRL_ID;
                             }
-                            mSelectionUtil.setString(key, mSelectionId);
+                            mSelectionUtil.setString(key, mLastSelectedId);
                             dialog.dismiss();
-                            mSelectionId = null;
+                            mLastSelectedId = null;
                             HomeActivity.super.onBackPressed();
                         }
 
                         @Override
                         public void onClickCancel() {
-                            mSelectionId = null;
+                            mLastSelectedId = null;
                             HomeActivity.super.onBackPressed();
                         }
                     }).newInstance(
@@ -176,7 +237,7 @@ public class HomeActivity extends BaseActivity {
         }.getType());
         mDialogMessage = FontUtils.getConvertedString(getResources().getString(R.string.selection_ask_msg, selection.name, type));
         mSelectionPhoto = (photo != null && photo.size() > 0) ? photo.get(0) : "";
-        mSelectionId = selection.selection_id;
+        mLastSelectedId = selection.selection_id;
     }
 
     public void saveQR(Bitmap bitmap, PermissionListener listener) {
@@ -274,5 +335,69 @@ public class HomeActivity extends BaseActivity {
             Timber.e("Permission denied");
             mPermissionListener.onError("Permission denied");
         }
+    }
+
+    @Shortcut(id = "king", rank = 3, icon = R.drawable.ic_shortcut_voting_test, shortLabel = "King")
+    public void kingClick() {
+        if (hasData()) {
+            if (TextUtils.isEmpty(mSelectionUtil.getString(SelectionUtil.KING_ID))) {
+                Bundle bundle = new Bundle();
+                bundle.putString("title", getStringResource(R.string.fragment_selection_list_king));
+                changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_king), bundle);
+            } else {
+                previewPhoto(mSelectionUtil.getString(SelectionUtil.KING_ID));
+            }
+        } else {
+            finish();
+            startActivity(new Intent(this, WelcomeActivity.class));
+        }
+    }
+
+    @Shortcut(id = "queen", rank = 2, icon = R.drawable.ic_shortcut_voting_test, shortLabel = "Queen")
+    public void queenClick() {
+        if (hasData()) {
+            if (TextUtils.isEmpty(mSelectionUtil.getString(SelectionUtil.QUEEN_ID))) {
+                mBundle.putString("title", getStringResource(R.string.fragment_selection_list_queen));
+                changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_king), mBundle);
+            } else {
+                previewPhoto(mSelectionUtil.getString(SelectionUtil.QUEEN_ID));
+            }
+        } else {
+            finish();
+            startActivity(new Intent(this, WelcomeActivity.class));
+        }
+    }
+
+    @Shortcut(id = "all_selection", rank = 1, icon = R.drawable.ic_more_selection, shortLabel = "More Selection")
+    public void selectionAll() {
+        if (!hasData()) {
+            finish();
+            startActivity(new Intent(this, WelcomeActivity.class));
+        }
+        if (isEmpty(SelectionUtil.KING_ID) && isEmpty(SelectionUtil.QUEEN_ID) && isEmpty(SelectionUtil.ATTRACTIVE_BOY_ID) && isEmpty(SelectionUtil.ATTRACTIVE_GIRL_ID) &&
+                isEmpty(SelectionUtil.INNOCENCE_BOY_ID) && isEmpty(SelectionUtil.INNOCENCE_GIRL_ID)) {
+            showFab();
+            onClickFab();
+        }
+    }
+
+    private void previewPhoto(String key) {
+        Selection data = mAppDatabase.selectionDao().getSelection(key);
+        Bundle bundle = new Bundle();
+        bundle.putString("title", data.name);
+        bundle.putString("selection_id", data.selection_id);
+        changeFrameLayout(
+                new FragmentPhoto(),
+                getStringResource(R.string.fragment_photo),
+                bundle
+        );
+    }
+
+    private boolean hasData() {
+        return mAppDatabase.selectionDao().selectionCount() != 0;
+    }
+
+    private boolean isEmpty(String key) {
+        return !TextUtils.isEmpty(mSelectionUtil.getString(key));
     }
 }

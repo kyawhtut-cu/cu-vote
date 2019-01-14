@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.kyawhtut.ucstgovoting.R;
+import com.kyawhtut.ucstgovoting.database.AppDatabase;
 import com.kyawhtut.ucstgovoting.utils.SelectionInjection;
 import com.kyawhtut.ucstgovoting.utils.SelectionUtil;
 
@@ -18,6 +19,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     Toolbar mToolbar;
 
     protected SelectionUtil mSelectionUtil;
+    protected AppDatabase mAppDatabase;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
         mSelectionUtil = SelectionInjection.provideSelection(this);
+        mAppDatabase = AppDatabase.getINSTANCE(this);
     }
 
     protected String getStringResource(int resource) {

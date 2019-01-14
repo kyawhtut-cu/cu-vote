@@ -35,18 +35,15 @@ import timber.log.Timber;
 
 public class FragmentSelectionList extends BaseFragment {
 
+    public boolean isSelected = false;
     @BindView(R.id.selection_rv)
     DiscreteScrollView mSelectionRv;
-
     @BindView(R.id.selection_count)
     ItemsCountView mSelectionCount;
-
     @BindView(R.id.ec_bg_switcher_element)
     ImageView mEcBgSwitcherElement;
-
     private SelectionRvAdapter mRvAdapter;
     private String type;
-    public boolean isSelected = false;
     private DialogFragmentBlur dialog;
     private int mOldPosition = 0;
 
@@ -178,8 +175,8 @@ public class FragmentSelectionList extends BaseFragment {
             );
         }
         sLiveData.observe(this, selections -> {
-            if (((HomeActivity) getActivity()).mSelectionId != null) {
-                int index = selections.indexOf(new Selection(((HomeActivity) getActivity()).mSelectionId));
+            if (((HomeActivity) getActivity()).mLastSelectedId != null) {
+                int index = selections.indexOf(new Selection(((HomeActivity) getActivity()).mLastSelectedId));
                 selections.get(index).isSelected = true;
             }
             mRvAdapter.swipeData(selections);

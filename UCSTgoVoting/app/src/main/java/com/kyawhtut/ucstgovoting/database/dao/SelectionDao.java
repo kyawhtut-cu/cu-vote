@@ -37,6 +37,9 @@ public interface SelectionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long[] insertSelection(List<Selection> selectionList);
 
+    @Query("select count(*) from " + Utils.SELECTION_TABLE)
+    int selectionCount();
+
     @Query("DELETE FROM " + Utils.SELECTION_TABLE)
     void deleteAll();
 }
