@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.design.card.MaterialCardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -69,7 +69,7 @@
                             tools:text="Class - A" />
                     </LinearLayout>
                 </RelativeLayout>
-            </android.support.design.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
         </RelativeLayout>
 
         <RelativeLayout
@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.design.card.MaterialCardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="8dp"
@@ -122,7 +122,7 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_voting_logo_web" />
                 </RelativeLayout>
-            </android.support.design.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
         </RelativeLayout>
 
         <LinearLayout
@@ -137,7 +137,7 @@
                 android:layout_weight="1">
 
 
-                <android.support.design.widget.FloatingActionButton
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/selection_fb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -147,10 +147,12 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="16dp"
+                    app:backgroundTint="@color/colorAccent"
                     app:fabSize="mini"
-                    app:srcCompat="@drawable/ic_facebook_logo" />
+                    app:rippleColor="@color/colorAccent"
+                    app:srcCompat="@drawable/ic_facebook_logo"
+                    app:tint="@color/colorWhite" />
             </RelativeLayout>
-
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -159,7 +161,7 @@
                 android:paddingStart="16dp"
                 android:paddingLeft="16dp">
 
-                <android.support.design.widget.FloatingActionButton
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/selection_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -168,7 +170,10 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="16dp"
                     android:src="@drawable/ic_fav"
-                    app:fabSize="normal" />
+                    app:backgroundTint="@color/colorAccent"
+                    app:fabSize="normal"
+                    app:rippleColor="@color/colorAccent"
+                    app:tint="@color/colorWhite" />
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>

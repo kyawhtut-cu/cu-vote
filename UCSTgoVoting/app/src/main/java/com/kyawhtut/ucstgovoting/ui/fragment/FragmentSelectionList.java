@@ -1,13 +1,15 @@
 package com.kyawhtut.ucstgovoting.ui.fragment;
 
-import android.arch.lifecycle.LiveData;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.google.gson.Gson;
@@ -23,9 +25,9 @@ import com.kyawhtut.ucstgovoting.ui.view.ItemsCountView;
 import com.kyawhtut.ucstgovoting.utils.GlideApp;
 import com.kyawhtut.ucstgovoting.utils.SelectionUtil;
 import com.kyawhtut.ucstgovoting.utils.Utils;
-import com.yarolegovich.discretescrollview.DSVOrientation;
-import com.yarolegovich.discretescrollview.DiscreteScrollView;
-import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
+import com.kyawhtut.ucstgovoting.utils.discretescroll.DSVOrientation;
+import com.kyawhtut.ucstgovoting.utils.discretescroll.DiscreteScrollView;
+import com.kyawhtut.ucstgovoting.utils.discretescroll.transform.ScaleTransformer;
 
 import java.util.List;
 
@@ -56,6 +58,11 @@ public class FragmentSelectionList extends BaseFragment {
         ((HomeActivity) getActivity()).getSupportActionBar().hide();
         ((HomeActivity) getActivity()).getSupportActionBar().setTitle(type);
         ((HomeActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            mEcBgSwitcherElement.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            mEcBgSwitcherElement.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
 
         mRvAdapter = new SelectionRvAdapter(getContext(), new DefaultItemClickListenerCallBack<Selection>() {
 

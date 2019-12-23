@@ -11,7 +11,7 @@ import retrofit2.http.Path;
 
 public interface Api {
 
-    @POST("v1.api/updateVotingUser/{api_key}")
+    @POST("v2.api/updateVotingUser/{api_key}")
     @FormUrlEncoded
     Single<VotingResponse> votedSelection(
             @Path("api_key") String api_key,
@@ -23,7 +23,7 @@ public interface Api {
             @Field("innocence_girl_id") String innocence_girl_id
     );
 
-    @POST("v1.api/loginUser/{api_key}")
+    @POST("v2.api/loginUser/{api_key}")
     @FormUrlEncoded
     Single<LoginResponse> loginUser(
             @Path("api_key") String api_key,

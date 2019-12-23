@@ -1,7 +1,7 @@
 package com.kyawhtut.ucstgovoting.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,9 +13,9 @@ import com.kyawhtut.ucstgovoting.adapter.clicklistener.DefaultItemClickListenerC
 import com.kyawhtut.ucstgovoting.database.db_vo.Selection;
 import com.kyawhtut.ucstgovoting.ui.activity.HomeActivity;
 import com.kyawhtut.ucstgovoting.utils.SelectionUtil;
-import com.yarolegovich.discretescrollview.DSVOrientation;
-import com.yarolegovich.discretescrollview.DiscreteScrollView;
-import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
+import com.kyawhtut.ucstgovoting.utils.discretescroll.DSVOrientation;
+import com.kyawhtut.ucstgovoting.utils.discretescroll.DiscreteScrollView;
+import com.kyawhtut.ucstgovoting.utils.discretescroll.transform.ScaleTransformer;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,8 +2,6 @@ package com.kyawhtut.ucstgovoting.utils.fonts;
 
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -11,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -110,7 +111,7 @@ public class MMFontUtils {
         }
     }
 
-    public static void applyMMFontToSnackBar(Snackbar snackbar) {
+    /*public static void applyMMFontToSnackBar(Snackbar snackbar) {
         TextView tvMsgSnack = (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
         if (tvMsgSnack != null) {
             tvMsgSnack.setLineSpacing(1.2f, 1.2f);
@@ -120,13 +121,13 @@ public class MMFontUtils {
                 String msg = tvMsgSnack.getText().toString();
                 tvMsgSnack.setText(MMFontUtils.mmText(msg, MMFontUtils.TEXT_UNICODE, true, true));
 
-                /*
+                *//*
                 String msg = tvMsgSnack.getText().toString();
                 tvMsgSnack.setText(MMFontUtils.uni2zg(msg));
-                */
+                *//*
             }
         }
-    }
+    }*/
 
     public static Typeface getMmTypeFace() {
         return mmTypeFace;
@@ -192,121 +193,121 @@ public class MMFontUtils {
 
     public static String Uni2XP(String str) {
 
-/* uni1004103A1039 */
+        /* uni1004103A1039 */
         str = str.replace("\u1004\u103A\u1039", "ၤ");
-/* uni10391000 */
+        /* uni10391000 */
         str = str.replace("\u1039\u1000", "ၠ");
-/* uni10391001 */
+        /* uni10391001 */
         str = str.replace("\u1039\u1001", "ၡ");
-/* uni10391002 */
+        /* uni10391002 */
         str = str.replace("\u1039\u1002", "ၢ");
-/* uni10391003 */
+        /* uni10391003 */
         str = str.replace("\u1039\u1003", "ၣ");
-/* uni10391005 */
+        /* uni10391005 */
         str = str.replace("\u1039\u1005", "ၨ");
-/* uni10391006 */
+        /* uni10391006 */
         str = str.replace("\u1039\u1006", "ၩ");
-/* uni10391007 */
+        /* uni10391007 */
         str = str.replace("\u1039\u1007", "ၪ");
-/* uni10391008 */
+        /* uni10391008 */
         str = str.replace("\u1039\u1008", "ၫ");
-/* uni1039100F */
+        /* uni1039100F */
         str = str.replace("\u1039\u100F", "ၴ");
-/* uni10391010 */
+        /* uni10391010 */
         str = str.replace("\u1039\u1010", "ၵ");
-/* uni10391011 */
+        /* uni10391011 */
         str = str.replace("\u1039\u1011", "ၷ");
-/* uni10391012 */
+        /* uni10391012 */
         str = str.replace("\u1039\u1012", "ၸ");
-/* uni10391013 */
+        /* uni10391013 */
         str = str.replace("\u1039\u1013", "ၹ");
-/* uni10391014 */
+        /* uni10391014 */
         str = str.replace("\u1039\u1014", "ၺ");
-/* uni10391015 */
+        /* uni10391015 */
         str = str.replace("\u1039\u1015", "ၻ");
-/* uni10391016 */
+        /* uni10391016 */
         str = str.replace("\u1039\u1016", "ၼ");
-/* uni10391017 */
+        /* uni10391017 */
         str = str.replace("\u1039\u1017", "ၽ");
-/* uni10391018 */
+        /* uni10391018 */
         str = str.replace("\u1039\u1018", "ၾ");
-/* uni10391019 */
+        /* uni10391019 */
         str = str.replace("\u1039\u1019", "ၿ");
-/* uni103B103D */
+        /* uni103B103D */
         str = str.replace("\u103B\u103D", "ႁ");
-/* uni103C103D */
+        /* uni103C103D */
         str = str.replace("\u103C\u103D", "ႅxႍ");
-/* uni103B103E */
+        /* uni103B103E */
         str = str.replace("\u103B\u103E", "ႂ");
-/* uni103C103E */
+        /* uni103C103E */
         str = str.replace("\u103C\u103E", "ႅx႑");
-/* uni103B103D103E */
+        /* uni103B103D103E */
         str = str.replace("\u103B\u103D\u103E", "ႃ");
-/* uni103C103D103E */
+        /* uni103C103D103E */
         str = str.replace("\u103C\u103D\u103E", "ႅxႎ");
         str = str.replace("\u103d\u103e", "ႎ");
-/* uni103E1030 */
+        /* uni103E1030 */
         //ERROR str = str.replace("\u103E\u1030","");
         //specials
-/* uni100C1039100C */
+        /* uni100C1039100C */
         str = str.replace("\u100C\u1039\u100C", "ၘ");
-/* uni100B1039100C */
+        /* uni100B1039100C */
         //ERROR str = str.replace("\u100B\u1039\u100C","");
-/* uni100F1039100D */
+        /* uni100F1039100D */
         str = str.replace("\u100F\u1039\u100D", "ဏ​ၱ");
-/* uni100F1039100B */
+        /* uni100F1039100B */
         str = str.replace("\u100F\u1039\u100B", "ဏ​ၮ");
-/* uni100F1039100C */
+        /* uni100F1039100C */
         str = str.replace("\u100F\u1039\u100C", "ဏ​ၰ");
-/* uni100F1039100F */
+        /* uni100F1039100F */
         str = str.replace("\u100F\u1039\u100F", "ဏၴ​");
-/* uni100F1039100E */
+        /* uni100F1039100E */
         str = str.replace("\u100F\u1039\u100E", "ဏ​ၳ");
-/* uni100D1039100E */
+        /* uni100D1039100E */
         str = str.replace("\u100D\u1039\u100E", "ဎ​ၲ");
-/* uni100D1039100D */
+        /* uni100D1039100D */
         str = str.replace("\u100D\u1039\u100D", "ဍ​ၮ");
-/* uni100B1039100B */
+        /* uni100B1039100B */
         str = str.replace("\u100B\u1039\u100B", "ဋ​ၮ");
-/* uni100710391009 */
+        /* uni100710391009 */
         str = str.replace("\u1007\u1039\u1009", "ဥ​ၼ");
-/* uni10391009 */
+        /* uni10391009 */
         str = str.replace("\u1039\u1009", "");
-/* uni1039100B */
+        /* uni1039100B */
         str = str.replace("\u1039\u100B", "ၮ");
-/* uni1039100Bvar */
+        /* uni1039100Bvar */
         //ERROR str = str.replace("\u1039\u100B","");
-/* uni1039100C */
+        /* uni1039100C */
         str = str.replace("\u1039\u100C", "ၰ");
-/* uni1039100D */
+        /* uni1039100D */
         str = str.replace("\u1039\u100D", "ၱ");
-/* uni1039100E */
+        /* uni1039100E */
         str = str.replace("\u1039\u103E", "ၳ");
-/* uni1039100F */
+        /* uni1039100F */
         str = str.replace("\u1039\u100F", "ၴ");
 
         str = str.replace("ါ်", "ါၗ");
 
         str = str.replace("ဉ\u103a", "ဥ​်");
-/* uni1039101B */
+        /* uni1039101B */
         //ERROR str = str.replace("\u1039\u101B","");
-/* uni10391020 */
+        /* uni10391020 */
         //ERROR str = str.replace("\u1039\u1020","");
-/* uni10391021 */
+        /* uni10391021 */
         //ERROR str = str.replace("\u1039\u1021","");
-/* uni10391022 */
+        /* uni10391022 */
         //ERROR str = str.replace("\u1039\u1022","");
-/* uni10511039100B */
+        /* uni10511039100B */
         //ERROR str = str.replace("\u1051\u1039\u100B","");
-/* uni10511039100C */
+        /* uni10511039100C */
         //ERROR str = str.replace("\u1051\u1039\u100C","");
-/* uni1039105A */
+        /* uni1039105A */
         //ERROR str = str.replace("\u1039\u105A","");
-/* uni1039105B */
+        /* uni1039105B */
         //ERROR str = str.replace("\u1039\u105B","");
-/* uni1039105C */
+        /* uni1039105C */
         //ERROR str = str.replace("\u1039\u105C","");
-/* uni1039105D */
+        /* uni1039105D */
         //ERROR str = str.replace("\u1039\u105D","");
 
         char[] sawBefore = new char[]{

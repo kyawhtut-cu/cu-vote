@@ -1,7 +1,7 @@
 package com.kyawhtut.ucstgovoting.adapter.viewholders;
 
 import android.annotation.SuppressLint;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;

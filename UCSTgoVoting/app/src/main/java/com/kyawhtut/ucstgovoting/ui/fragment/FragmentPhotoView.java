@@ -2,7 +2,7 @@ package com.kyawhtut.ucstgovoting.ui.fragment;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -13,7 +13,6 @@ import com.bumptech.glide.request.target.Target;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.github.silvestrpredko.dotprogressbar.DotProgressBar;
 import com.kyawhtut.ucstgovoting.R;
-import com.kyawhtut.ucstgovoting.ui.view.TouchImageView;
 import com.kyawhtut.ucstgovoting.utils.GlideApp;
 import com.kyawhtut.ucstgovoting.utils.Utils;
 

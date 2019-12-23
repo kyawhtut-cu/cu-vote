@@ -37,7 +37,8 @@
     <string name="report_bugs">Report Bugs</string>
     <string name="selection_detail">Selection Detail</string>
     <string name="selelction_facebook">ဖေ့စ်ဘွတ် အကောင့် </string>
-    <string name="selection_information">အခန်း - %s\nလိင်အမျိုးအစား - %s\nမဲအရေအတွက်(၁) - %s\nမဲအရေအတွက်(၂) - %s\nမဲအရေအတွက်(၃) - %s</string>
+    <string name="selection_information_male">အခန်း - %s\nလိင်အမျိုးအစား - %s\nKing မဲရလဒ် - %s\nAttractive Boy မဲရလဒ် - %s\nInnocence မဲရလဒ် - %s</string>
+    <string name="selection_information_female">အခန်း - %s\nလိင်အမျိုးအစား - %s\nQueen မဲရလဒ် - %s\nAttractive Girl မဲရလဒ် - %s\nInnocence မဲရလဒ် - %s</string>
     <string name="selection_empty">တစ်ခုခုမှားယွင်းနေပါသည်။</string>
     <string name="try_again">ပြန်ကြိုးစားမည်</string>
     <string name="selection_data_loading">ခေတ္တခနစောင့်ဆိုင်းပေးပါခင်ဗျာ။</string>
@@ -72,6 +73,9 @@
         <item>ယောင်္ကျားလေး</item>
         <item>မိန်းကလေး</item>
     </string-array>
+
+    <string name="dsv_ex_msg_dont_set_lm">You should not set LayoutManager on DiscreteScrollView.class instance. Library uses a special one. Just don\'t call the method.</string>
+    <string name="dsv_ex_msg_adapter_wrong_recycler">InfiniteScrollAdapter is supposed to work only with DiscreteScrollView</string>
 
     <string-array name="mm_text">
         <item>၀</item>

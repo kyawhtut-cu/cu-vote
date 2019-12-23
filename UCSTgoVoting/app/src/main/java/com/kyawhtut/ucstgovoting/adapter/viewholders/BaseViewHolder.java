@@ -1,8 +1,9 @@
 package com.kyawhtut.ucstgovoting.adapter.viewholders;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.kyawhtut.ucstgovoting.adapter.clicklistener.DefaultItemClickListener;
 

@@ -28,8 +28,6 @@ import com.kyawhtut.ucstgovotingadmin.utils.SharedPreferenceUtil;
 import com.kyawhtut.ucstgovotingadmin.utils.Utils;
 import com.kyawhtut.ucstgovotingadmin.utils.fonts.FontUtils;
 
-import org.w3c.dom.Text;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +37,7 @@ import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 public class LoginActivity extends BaseActivity {
 
@@ -126,6 +125,9 @@ public class LoginActivity extends BaseActivity {
                                     mPreferenceUtil.clearValue();
                                     showDialog(loginResponse.message);
                                 }
+                            }, throwable -> {
+                                showDialog(throwable.getMessage());
+                                Timber.e(throwable);
                             })
             );
         }

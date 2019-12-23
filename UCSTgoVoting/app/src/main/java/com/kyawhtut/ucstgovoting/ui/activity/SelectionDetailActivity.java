@@ -4,11 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.Group;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +12,13 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Group;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.kyawhtut.ucstgovoting.R;
 import com.kyawhtut.ucstgovoting.adapter.PhotoRvAdapter;
 import com.kyawhtut.ucstgovoting.adapter.clicklistener.DefaultItemClickListenerCallBack;
@@ -187,7 +189,7 @@ public class SelectionDetailActivity extends BaseActivity {
                             this.setTitle(FontUtils.getConvertedString(selectionDetailResponse.mSelection.name));
                             tvSelectionName.setText(FontUtils.getConvertedString(selectionDetailResponse.mSelection.name));
                             String info = getString(
-                                    R.string.selection_information,
+                                    (Integer.parseInt(selectionDetailResponse.mSelection.gender) == 0) ? R.string.selection_information_male : R.string.selection_information_female,
                                     selectionDetailResponse.mSelection.class_name,
                                     getResources().getStringArray(R.array.gender)[Integer.parseInt(selectionDetailResponse.mSelection.gender)],
                                     getCount(selectionDetailResponse.mSelection.count_one),
@@ -196,6 +198,7 @@ public class SelectionDetailActivity extends BaseActivity {
                             mPhotoRvAdapter.swipeData(selectionDetailResponse.mSelection.photo);
                             tvSelectionInformation.setText(FontUtils.getConvertedString(info));
                         } else {
+                            this.setTitle("Server close");
                             selectionLayout.setVisibility(View.GONE);
                             loadingLayout.setVisibility(View.GONE);
                             noData.setVisibility(View.VISIBLE);
@@ -203,6 +206,11 @@ public class SelectionDetailActivity extends BaseActivity {
                             errorLabel.setText(FontUtils.getConvertedString(selectionDetailResponse.message));
                         }
                     }, throwable -> {
+                        if (throwable instanceof HttpException) {
+                            this.setTitle("Error - " + ((HttpException) throwable).code());
+                        } else {
+                            this.setTitle("Error");
+                        }
                         selectionLayout.setVisibility(View.GONE);
                         loadingLayout.setVisibility(View.GONE);
                         noData.setVisibility(View.VISIBLE);

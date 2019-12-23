@@ -20,4 +20,11 @@
         <!--<item name="android:textColor">#da7c80b8</item>-->
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
+
+    <declare-styleable name="DiscreteScrollView">
+        <attr name="dsv_orientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
 </resources>

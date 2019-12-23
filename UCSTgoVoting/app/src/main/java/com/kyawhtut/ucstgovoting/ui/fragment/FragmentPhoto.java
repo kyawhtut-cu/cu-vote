@@ -1,8 +1,8 @@
 package com.kyawhtut.ucstgovoting.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

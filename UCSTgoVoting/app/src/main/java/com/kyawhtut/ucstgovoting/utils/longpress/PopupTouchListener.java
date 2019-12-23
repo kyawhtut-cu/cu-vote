@@ -1,7 +1,7 @@
 package com.kyawhtut.ucstgovoting.utils.longpress;
 
 import android.os.Handler;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 import android.view.MotionEvent;
 import android.view.View;
 

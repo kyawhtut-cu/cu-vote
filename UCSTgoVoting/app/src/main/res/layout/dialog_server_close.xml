@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -53,5 +53,5 @@
                 android:textColor="@drawable/background_btn_ok_text"
                 android:textSize="18sp" />
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>

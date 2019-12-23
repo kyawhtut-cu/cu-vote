@@ -5,8 +5,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
@@ -96,8 +96,7 @@ public class WelcomeActivity extends AppCompatActivity {
                                         tmp.add(selection);
                                     }
                                     mAppDatabase.selectionDao().deleteAll();
-                                    long[] lol = mAppDatabase.selectionDao().insertSelection(tmp);
-                                    Timber.i("id : %s", new Gson().toJson(lol));
+                                    mAppDatabase.selectionDao().insertSelection(tmp);
                                     return "success";
                                 }
                                 return selectionResponse.message;
