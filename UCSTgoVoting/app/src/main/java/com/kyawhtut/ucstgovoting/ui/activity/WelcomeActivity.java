@@ -1,12 +1,9 @@
 package com.kyawhtut.ucstgovoting.ui.activity;
 
-import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
@@ -14,12 +11,14 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
 import com.kyawhtut.ucstgovoting.R;
 import com.kyawhtut.ucstgovoting.database.AppDatabase;
 import com.kyawhtut.ucstgovoting.database.db_vo.Selection;
 import com.kyawhtut.ucstgovoting.model.VotingModel;
-import com.kyawhtut.ucstgovoting.ui.fragment.DialogFragmentBlur;
 import com.kyawhtut.ucstgovoting.ui.fragment.DialogServerUnAvailableFragment;
 import com.kyawhtut.ucstgovoting.utils.NetworkUtils;
 
@@ -72,18 +71,15 @@ public class WelcomeActivity extends AppCompatActivity {
         mConnectionError.setVisibility(View.GONE);
         if (!NetworkUtils.isOnline(this)) {
             mConnectionError.setVisibility(View.VISIBLE);
-            new DialogServerUnAvailableFragment().newInstance(
-                    16,
-                    4,
-                    false,
-                    false,
-                    getResources().getString(R.string.connection_error)
-            ).setListener(new DialogFragmentBlur.DialogDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    finish();
-                }
-            }).show(getFragmentManager(), "");
+            new DialogServerUnAvailableFragment()
+                    .setListener(dialog -> finish())
+                    .newInstance(
+                            16,
+                            4,
+                            false,
+                            false,
+                            getResources().getString(R.string.connection_error)
+                    ).show(getFragmentManager(), "");
         } else {
             mCompositeDisposable.add(
                     VotingModel.getINSTANCE().getServerStatus()
@@ -108,33 +104,27 @@ public class WelcomeActivity extends AppCompatActivity {
                                     finish();
                                     startActivity(HomeActivity.getIntent(WelcomeActivity.this));
                                 } else {
-                                    new DialogServerUnAvailableFragment().newInstance(
-                                            32,
-                                            4,
-                                            false,
-                                            false,
-                                            s
-                                    ).setListener(new DialogFragmentBlur.DialogDismissListener() {
-                                        @Override
-                                        public void onDismiss(DialogInterface dialog) {
-                                            finish();
-                                        }
-                                    }).show(getFragmentManager(), "");
+                                    new DialogServerUnAvailableFragment()
+                                            .setListener(dialog -> finish())
+                                            .newInstance(
+                                                    32,
+                                                    4,
+                                                    false,
+                                                    false,
+                                                    s
+                                            ).show(getFragmentManager(), "");
                                 }
                             }, throwable -> {
                                 Timber.e(throwable);
-                                new DialogServerUnAvailableFragment().newInstance(
-                                        16,
-                                        4,
-                                        false,
-                                        false,
-                                        getResources().getString(R.string.connection_error)
-                                ).setListener(new DialogFragmentBlur.DialogDismissListener() {
-                                    @Override
-                                    public void onDismiss(DialogInterface dialog) {
-                                        finish();
-                                    }
-                                }).show(getFragmentManager(), "");
+                                new DialogServerUnAvailableFragment()
+                                        .setListener(dialog -> finish())
+                                        .newInstance(
+                                                16,
+                                                4,
+                                                false,
+                                                false,
+                                                getResources().getString(R.string.connection_error)
+                                        ).show(getFragmentManager(), "");
                             })
             );
         }

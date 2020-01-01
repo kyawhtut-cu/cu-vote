@@ -19,6 +19,7 @@ public class DialogServerUnAvailableFragment extends DialogFragmentBlur {
 
     public DialogFragmentBlur newInstance(int radius, float downScaleFactor, boolean dimming, boolean debug, String message) {
         this.message = message;
+        setCancelable(false);
         return super.newInstance(radius, downScaleFactor, dimming, debug);
     }
 

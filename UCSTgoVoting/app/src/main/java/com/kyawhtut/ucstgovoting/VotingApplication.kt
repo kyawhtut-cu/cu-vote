@@ -15,6 +15,7 @@ class VotingApplication : Application() {
             Timber.plant(DebugTree())
         }
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
+        FirebaseMessaging.getInstance().subscribeToTopic("all")
         Shortbread.create(this)
         CaocConfig.Builder.create()
                 .showErrorDetails(BuildConfig.DEBUG)
