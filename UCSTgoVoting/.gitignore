@@ -9,6 +9,3 @@
 /build
 /captures
 .externalNativeBuild
-gradle.properties
-release-read-me-first.txt
-cu_vote_tgo.jks

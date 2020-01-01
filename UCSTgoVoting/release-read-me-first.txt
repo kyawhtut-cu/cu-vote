@@ -1,0 +1,2 @@
+﻿Key alias - cu_vote_tgo
+Password - cuvote
