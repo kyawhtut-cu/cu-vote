@@ -10,15 +10,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.core.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kyawhtut.ucstgovoting.R;
@@ -27,6 +29,7 @@ import com.kyawhtut.ucstgovoting.database.db_vo.Selection;
 import com.kyawhtut.ucstgovoting.ui.fragment.DialogFragmentBlur;
 import com.kyawhtut.ucstgovoting.ui.fragment.DialogPhotoPreviewFragment;
 import com.kyawhtut.ucstgovoting.ui.fragment.DialogQRFragment;
+import com.kyawhtut.ucstgovoting.ui.fragment.DialogServerUnAvailableFragment;
 import com.kyawhtut.ucstgovoting.ui.fragment.DialogVotingConfirmFragment;
 import com.kyawhtut.ucstgovoting.ui.fragment.FragmentPhoto;
 import com.kyawhtut.ucstgovoting.ui.fragment.FragmentSelection;
@@ -34,6 +37,7 @@ import com.kyawhtut.ucstgovoting.ui.fragment.FragmentSelectionList;
 import com.kyawhtut.ucstgovoting.utils.DateUtils;
 import com.kyawhtut.ucstgovoting.utils.SelectionUtil;
 import com.kyawhtut.ucstgovoting.utils.fonts.FontUtils;
+import com.kyawhtut.ucstgovoting.utils.notification.VotingNotification;
 import com.kyawhtut.ucstgovoting.utils.permission.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
@@ -59,6 +63,7 @@ public class HomeActivity extends BaseActivity {
     private Bitmap mBitmap;
     private PermissionListener mPermissionListener;
     private Bundle mBundle = new Bundle();
+    public static String firebaseToken = "";
 
     private DialogFragmentBlur mBlurDialog;
 
@@ -69,6 +74,31 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Timber.e(task.getException(), "getInstanceId failed");
+                return;
+            }
+            // Get new Instance ID token
+            firebaseToken = task.getResult().getToken();
+        });
+
+        VotingNotification.notificationResponse.observe(this, s -> {
+            if (mBlurDialog != null) {
+                mBlurDialog.dismiss();
+                if (getSupportFragmentManager().findFragmentById(R.id.content_frame) instanceof FragmentSelection) {
+                    ((FragmentSelection) getSupportFragmentManager().findFragmentById(R.id.content_frame)).clearVoting();
+                }
+                new DialogServerUnAvailableFragment().setListener(DialogInterface::dismiss).newInstance(
+                        16,
+                        4,
+                        false,
+                        false,
+                        s
+                ).show(getFragmentManager(), "");
+            }
+        });
 
         mBundle.putString("title", getStringResource(R.string.fragment_home));
         changeFrameLayout(
@@ -105,9 +135,13 @@ public class HomeActivity extends BaseActivity {
                             changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_attractive_girl), mBundle);
                             break;
                         case 4:
+                            mBundle.putString("title", getStringResource(R.string.fragment_selection_list_innocence));
+                            changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_innocence), mBundle);
+                            break;
+                        /*case 4:
                             mBundle.putString("title", getStringResource(R.string.fragment_selection_list_innocence_boy));
                             changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_innocence_boy), mBundle);
-                            break;
+                            break;*/
                         case 5:
                             mBundle.putString("title", getStringResource(R.string.fragment_selection_list_innocence_girl));
                             changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_innocence_girl), mBundle);
@@ -147,12 +181,13 @@ public class HomeActivity extends BaseActivity {
 
     @OnClick(R.id.fab_finish)
     public void onClickFab() {
-        new DialogQRFragment().newInstance(
+        mBlurDialog = new DialogQRFragment().newInstance(
                 16,
                 4,
                 false,
                 false
-        ).show(getFragmentManager(), "blur_sample");
+        );
+        mBlurDialog.show(getFragmentManager(), "blur_sample");
     }
 
     @Override
@@ -184,6 +219,7 @@ public class HomeActivity extends BaseActivity {
                     tag.equals(getStringResource(R.string.fragment_selection_list_queen)) ||
                     tag.equals(getStringResource(R.string.fragment_selection_list_attractive_boy)) ||
                     tag.equals(getStringResource(R.string.fragment_selection_list_attractive_girl)) ||
+                    tag.equals(getStringResource(R.string.fragment_selection_list_innocence)) ||
                     tag.equals(getStringResource(R.string.fragment_selection_list_innocence_boy)) ||
                     tag.equals(getStringResource(R.string.fragment_selection_list_innocence_girl))) {
                 if (((FragmentSelectionList) getSupportFragmentManager().findFragmentById(R.id.content_frame)).isSelected) {
@@ -199,6 +235,8 @@ public class HomeActivity extends BaseActivity {
                                 key = SelectionUtil.ATTRACTIVE_BOY_ID;
                             } else if (key.equals(getStringResource(R.string.fragment_selection_list_attractive_girl))) {
                                 key = SelectionUtil.ATTRACTIVE_GIRL_ID;
+                            } else if (key.equals(getStringResource(R.string.fragment_selection_list_innocence))) {
+                                key = SelectionUtil.INNOCENCE_ID;
                             } else if (key.equals(getStringResource(R.string.fragment_selection_list_innocence_boy))) {
                                 key = SelectionUtil.INNOCENCE_BOY_ID;
                             } else if (key.equals(getStringResource(R.string.fragment_selection_list_innocence_girl))) {
@@ -339,46 +377,45 @@ public class HomeActivity extends BaseActivity {
 
     @Shortcut(id = "king", rank = 3, icon = R.drawable.ic_shortcut_voting_test, shortLabel = "King")
     public void kingClick() {
-        if (hasData()) {
-            if (TextUtils.isEmpty(mSelectionUtil.getString(SelectionUtil.KING_ID))) {
-                Bundle bundle = new Bundle();
-                bundle.putString("title", getStringResource(R.string.fragment_selection_list_king));
-                changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_king), bundle);
-            } else {
-                previewPhoto(mSelectionUtil.getString(SelectionUtil.KING_ID));
-            }
+        if (checkData()) return;
+        if (TextUtils.isEmpty(mSelectionUtil.getString(SelectionUtil.KING_ID))) {
+            Bundle bundle = new Bundle();
+            bundle.putString("title", getStringResource(R.string.fragment_selection_list_king));
+            changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_king), bundle);
         } else {
-            finish();
-            startActivity(new Intent(this, WelcomeActivity.class));
+            previewPhoto(mSelectionUtil.getString(SelectionUtil.KING_ID));
         }
+
     }
 
     @Shortcut(id = "queen", rank = 2, icon = R.drawable.ic_shortcut_voting_test, shortLabel = "Queen")
     public void queenClick() {
-        if (hasData()) {
-            if (TextUtils.isEmpty(mSelectionUtil.getString(SelectionUtil.QUEEN_ID))) {
-                mBundle.putString("title", getStringResource(R.string.fragment_selection_list_queen));
-                changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_king), mBundle);
-            } else {
-                previewPhoto(mSelectionUtil.getString(SelectionUtil.QUEEN_ID));
-            }
+        if (checkData()) return;
+        if (TextUtils.isEmpty(mSelectionUtil.getString(SelectionUtil.QUEEN_ID))) {
+            mBundle.putString("title", getStringResource(R.string.fragment_selection_list_queen));
+            changeFrameLayout(new FragmentSelectionList(), getStringResource(R.string.fragment_selection_list_king), mBundle);
         } else {
-            finish();
-            startActivity(new Intent(this, WelcomeActivity.class));
+            previewPhoto(mSelectionUtil.getString(SelectionUtil.QUEEN_ID));
         }
     }
 
     @Shortcut(id = "all_selection", rank = 1, icon = R.drawable.ic_more_selection, shortLabel = "More Selection")
     public void selectionAll() {
-        if (!hasData()) {
-            finish();
-            startActivity(new Intent(this, WelcomeActivity.class));
-        }
+        if (checkData()) return;
         if (isEmpty(SelectionUtil.KING_ID) && isEmpty(SelectionUtil.QUEEN_ID) && isEmpty(SelectionUtil.ATTRACTIVE_BOY_ID) && isEmpty(SelectionUtil.ATTRACTIVE_GIRL_ID) &&
                 isEmpty(SelectionUtil.INNOCENCE_BOY_ID) && isEmpty(SelectionUtil.INNOCENCE_GIRL_ID)) {
             showFab();
             onClickFab();
         }
+    }
+
+    private boolean checkData() {
+        if (!hasData()) {
+            finish();
+            startActivity(new Intent(this, WelcomeActivity.class));
+            return true;
+        }
+        return false;
     }
 
     private void previewPhoto(String key) {

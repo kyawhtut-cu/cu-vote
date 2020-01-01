@@ -71,8 +71,10 @@ public class DialogQRFragment extends DialogFragmentBlur {
                 mSelectionUtil.getString(SelectionUtil.QUEEN_ID) + "#" +
                 mSelectionUtil.getString(SelectionUtil.ATTRACTIVE_BOY_ID) + "#" +
                 mSelectionUtil.getString(SelectionUtil.ATTRACTIVE_GIRL_ID) + "#" +
-                mSelectionUtil.getString(SelectionUtil.INNOCENCE_BOY_ID) + "#" +
-                mSelectionUtil.getString(SelectionUtil.INNOCENCE_GIRL_ID);
+                mSelectionUtil.getString(SelectionUtil.INNOCENCE_ID) + "#" +
+                HomeActivity.firebaseToken;
+                /*mSelectionUtil.getString(SelectionUtil.INNOCENCE_BOY_ID) + "#" +
+                mSelectionUtil.getString(SelectionUtil.INNOCENCE_GIRL_ID);*/
         mQRImage.setImageBitmap(getQrImage(qrData));
     }
 

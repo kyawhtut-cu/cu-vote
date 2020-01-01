@@ -14,13 +14,12 @@ import java.util.List;
 @Dao
 public interface SelectionDao {
 
-    @Query("select * from " + Utils.SELECTION_TABLE + " where selection_id<>:king_id AND selection_id<>:queen_id AND selection_id<>:attractive_boy_id AND selection_id<>:attractive_girl_id AND selection_id<>:innocence_id")
+    @Query("select * from " + Utils.SELECTION_TABLE + " where selection_id<>:king_id AND selection_id<>:queen_id AND selection_id<>:attractive_boy_id AND selection_id<>:attractive_girl_id")
     LiveData<List<Selection>> getInnocenceList(
             String king_id,
             String queen_id,
             String attractive_boy_id,
-            String attractive_girl_id,
-            String innocence_id
+            String attractive_girl_id
     );
 
     @Query("select * from " + Utils.SELECTION_TABLE + " where gender = :gender AND selection_id<>:first_id AND selection_id<>:second_id AND selection_id<>:third_id")

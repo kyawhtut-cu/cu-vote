@@ -11,7 +11,7 @@ import retrofit2.http.Path;
 
 public interface Api {
 
-    @POST("v2.api/updateVotingUser/{api_key}")
+    @POST("voting/v2.api/updateVotingUser/{api_key}")
     @FormUrlEncoded
     Single<VotingResponse> votedSelection(
             @Path("api_key") String api_key,
@@ -19,11 +19,13 @@ public interface Api {
             @Field("queen_id") String queen_id,
             @Field("att_boy_id") String att_boy_id,
             @Field("att_girl_id") String att_girl_id,
-            @Field("innocence_boy_id") String innocence_boy_id,
-            @Field("innocence_girl_id") String innocence_girl_id
+            @Field("innocence_id") String innocence_id,
+            @Field("token") String token
+            /*@Field("innocence_boy_id") String innocence_boy_id,
+            @Field("innocence_girl_id") String innocence_girl_id*/
     );
 
-    @POST("v2.api/loginUser/{api_key}")
+    @POST("voting/v2.api/loginUser/{api_key}")
     @FormUrlEncoded
     Single<LoginResponse> loginUser(
             @Path("api_key") String api_key,

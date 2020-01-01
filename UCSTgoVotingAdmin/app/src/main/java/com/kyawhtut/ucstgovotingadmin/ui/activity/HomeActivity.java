@@ -2,48 +2,38 @@ package com.kyawhtut.ucstgovotingadmin.ui.activity;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.Layout;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.google.zxing.Result;
 import com.kyawhtut.ucstgovotingadmin.BuildConfig;
 import com.kyawhtut.ucstgovotingadmin.R;
 import com.kyawhtut.ucstgovotingadmin.model.AdminModel;
-import com.kyawhtut.ucstgovotingadmin.network.response.VotingResponse;
 import com.kyawhtut.ucstgovotingadmin.utils.NetworkUtils;
 import com.kyawhtut.ucstgovotingadmin.utils.SharedPreferenceInjection;
 import com.kyawhtut.ucstgovotingadmin.utils.SharedPreferenceUtil;
 import com.kyawhtut.ucstgovotingadmin.utils.Utils;
 import com.kyawhtut.ucstgovotingadmin.utils.fonts.FontUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -51,10 +41,8 @@ import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import timber.log.Timber;
@@ -181,9 +169,8 @@ public class HomeActivity extends BaseActivity implements ZXingScannerView.Resul
     public void handleResult(Result result) {
         if (NetworkUtils.isOnline(this)) {
             try {
-                Timber.i("Data : %s", result.getText());
                 List<String> selectionId = Arrays.asList(result.getText().split("#"));
-                if (selectionId != null && selectionId.size() == 6) {
+                if (selectionId.size() >= 6) {
                     mLoadingProgress.setVisibility(View.VISIBLE);
                     mDisposable.add(
                             mAdminModel.votedSelection(selectionId)

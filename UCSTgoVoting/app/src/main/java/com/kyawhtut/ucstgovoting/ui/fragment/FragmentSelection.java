@@ -1,11 +1,12 @@
 package com.kyawhtut.ucstgovoting.ui.fragment;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import androidx.annotation.Nullable;
 
 import com.kyawhtut.ucstgovoting.R;
 import com.kyawhtut.ucstgovoting.adapter.ChooseSelectionRvAdapter;
@@ -73,10 +74,15 @@ public class FragmentSelection extends BaseFragment {
         bindSelection();
     }
 
+    private boolean isEmptyInnocenceID() {
+        return isEmpty(SelectionUtil.INNOCENCE_ID);
+//        return isEmpty(SelectionUtil.INNOCENCE_BOY_ID) && isEmpty(SelectionUtil.INNOCENCE_GIRL_ID);
+    }
+
     private void bindSelection() {
         mSelectionList.clear();
         if (isEmpty(SelectionUtil.KING_ID) && isEmpty(SelectionUtil.QUEEN_ID) && isEmpty(SelectionUtil.ATTRACTIVE_BOY_ID) && isEmpty(SelectionUtil.ATTRACTIVE_GIRL_ID) &&
-                isEmpty(SelectionUtil.INNOCENCE_BOY_ID) && isEmpty(SelectionUtil.INNOCENCE_GIRL_ID)) {
+                isEmptyInnocenceID()) {
             ((HomeActivity) getActivity()).showFab();
             setHasOptionsMenu(true);
         } else {
@@ -87,8 +93,9 @@ public class FragmentSelection extends BaseFragment {
         bindSelection(SelectionUtil.QUEEN_ID, 1);
         bindSelection(SelectionUtil.ATTRACTIVE_BOY_ID, 2);
         bindSelection(SelectionUtil.ATTRACTIVE_GIRL_ID, 3);
-        bindSelection(SelectionUtil.INNOCENCE_BOY_ID, 4);
-        bindSelection(SelectionUtil.INNOCENCE_GIRL_ID, 5);
+        bindSelection(SelectionUtil.INNOCENCE_ID, 4);
+        /*bindSelection(SelectionUtil.INNOCENCE_BOY_ID, 4);
+        bindSelection(SelectionUtil.INNOCENCE_GIRL_ID, 5);*/
 
         mAdapter.swipeData(mSelectionList);
     }
@@ -122,9 +129,13 @@ public class FragmentSelection extends BaseFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_clear_voting) {
-            mSelectionUtil.clearValue();
-            bindSelection();
+            clearVoting();
         }
         return true;
+    }
+
+    public void clearVoting() {
+        mSelectionUtil.clearValue();
+        bindSelection();
     }
 }

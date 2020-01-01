@@ -7,9 +7,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -18,8 +15,13 @@ import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.textfield.TextInputLayout;
 import com.kyawhtut.ucstgovotingadmin.BuildConfig;
 import com.kyawhtut.ucstgovotingadmin.R;
 import com.kyawhtut.ucstgovotingadmin.model.AdminModel;
@@ -59,6 +61,9 @@ public class LoginActivity extends BaseActivity {
 
     @BindView(R.id.version_label)
     TextView mVersionLabel;
+
+    @BindView(R.id.loading_progress)
+    LinearLayout mLoadingLayout;
 
     private SharedPreferenceUtil mPreferenceUtil;
     private AdminModel mAdminModel;
@@ -106,6 +111,7 @@ public class LoginActivity extends BaseActivity {
                 mPasswordInput.setError("Password is required");
             }
         } else {
+            mLoadingLayout.setVisibility(View.VISIBLE);
             String email = mEdEmail.getText().toString();
             String password = mEdPassword.getText().toString();
             mDisposable.add(
@@ -122,10 +128,12 @@ public class LoginActivity extends BaseActivity {
                                     finish();
                                     startActivity(HomeActivity.getIntent(LoginActivity.this));
                                 } else {
+                                    mLoadingLayout.setVisibility(View.GONE);
                                     mPreferenceUtil.clearValue();
                                     showDialog(loginResponse.message);
                                 }
                             }, throwable -> {
+                                mLoadingLayout.setVisibility(View.GONE);
                                 showDialog(throwable.getMessage());
                                 Timber.e(throwable);
                             })

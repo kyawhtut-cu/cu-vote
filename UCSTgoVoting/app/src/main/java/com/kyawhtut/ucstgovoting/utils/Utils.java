@@ -12,8 +12,8 @@ public class Utils {
     public static final String DB_NAME = "selection_db";
     public static final String SELECTION_TABLE = "selection_table";
 
-    public static final String BASE_URL = "http://voting.kyawhtut.com/";
-    public static final String PHOTO_RESOURCE = "resource/";
+    public static final String BASE_URL = "https://ucstaungoo.app/";
+    public static final String PHOTO_RESOURCE = "voting/resource/";
 
     public static int convertDpToPixel(float dp, Context context) {
         Resources resources = context.getResources();

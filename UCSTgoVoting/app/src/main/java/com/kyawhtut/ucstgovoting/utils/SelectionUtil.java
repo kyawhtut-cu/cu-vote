@@ -11,7 +11,8 @@ public class SelectionUtil {
     public static final String KING_ID = "king id";
     public static final String QUEEN_ID = "queen id";
     public static final String ATTRACTIVE_BOY_ID = "attractive boy id";
-    public static final String ATTRACTIVE_GIRL_ID = "attractie girl id";
+    public static final String ATTRACTIVE_GIRL_ID = "attractive girl id";
+    public static final String INNOCENCE_ID = "innocence id";
     public static final String INNOCENCE_BOY_ID = "innocence boy id";
     public static final String INNOCENCE_GIRL_ID = "innocence girl id";
 

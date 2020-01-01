@@ -5,6 +5,7 @@ import com.kyawhtut.ucstgovotingadmin.BuildConfig;
 import com.kyawhtut.ucstgovotingadmin.network.Api;
 import com.kyawhtut.ucstgovotingadmin.network.response.LoginResponse;
 import com.kyawhtut.ucstgovotingadmin.network.response.VotingResponse;
+import com.kyawhtut.ucstgovotingadmin.utils.UnsafeOkHttpClient;
 import com.kyawhtut.ucstgovotingadmin.utils.Utils;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class AdminModel {
     private AdminModel() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient().addInterceptor(interceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Utils.BASE_URL)
@@ -51,6 +52,7 @@ public class AdminModel {
                 selectionId.get(3),
                 selectionId.get(4),
                 selectionId.get(5)
+                /*, selectionId.get(6)*/
         );
     }
 

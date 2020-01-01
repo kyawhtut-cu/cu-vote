@@ -5,6 +5,7 @@ import com.kyawhtut.ucstgovoting.BuildConfig;
 import com.kyawhtut.ucstgovoting.network.SelectionApi;
 import com.kyawhtut.ucstgovoting.network.response.SelectionDetailResponse;
 import com.kyawhtut.ucstgovoting.network.response.SelectionResponse;
+import com.kyawhtut.ucstgovoting.utils.UnsafeOkHttpClient;
 import com.kyawhtut.ucstgovoting.utils.Utils;
 
 import io.reactivex.Single;
@@ -24,7 +25,9 @@ public class VotingModel {
     private VotingModel() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.level(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient()
+                .addInterceptor(interceptor)
+                .build();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Utils.BASE_URL)

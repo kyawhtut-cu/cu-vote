@@ -1,0 +1,122 @@
+{
+  "project_info": {
+    "project_number": "85178958352",
+    "firebase_url": "https://fb-php-test.firebaseio.com",
+    "project_id": "fb-php-test",
+    "storage_bucket": "fb-php-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85178958352:android:b955f87d5cf55ec1",
+        "android_client_info": {
+          "package_name": "com.kyawhtut.accountkit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85178958352-j2fndebnjc749k8v15vai6km3a88salr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kyawhtut.accountkit",
+            "certificate_hash": "a82bcd27a3565852159328475d2934c041b21425"
+          }
+        },
+        {
+          "client_id": "85178958352-jtfend0uk2e809e15ildegpghmf18c4v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVApkQHFbdfFs6d-e4Xls1D8YWbGjgPB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85178958352-jtfend0uk2e809e15ildegpghmf18c4v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85178958352:android:e26aa70d412e3109",
+        "android_client_info": {
+          "package_name": "com.kyawhtut.firebaseandwebtesting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85178958352-3b00pvvh21l8kfo1fvcu5bdh93cf1ped.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kyawhtut.firebaseandwebtesting",
+            "certificate_hash": "a82bcd27a3565852159328475d2934c041b21425"
+          }
+        },
+        {
+          "client_id": "85178958352-jtfend0uk2e809e15ildegpghmf18c4v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVApkQHFbdfFs6d-e4Xls1D8YWbGjgPB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85178958352-jtfend0uk2e809e15ildegpghmf18c4v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85178958352:android:2c5d161eb334c6d5a54095",
+        "android_client_info": {
+          "package_name": "com.kyawhtut.ucstgovoting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85178958352-vl71nb1s10ddm8j338pfjvm25fufgnmu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kyawhtut.ucstgovoting",
+            "certificate_hash": "812ce2fbdb1436b53b76121a7cc3db4a58578edb"
+          }
+        },
+        {
+          "client_id": "85178958352-jtfend0uk2e809e15ildegpghmf18c4v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVApkQHFbdfFs6d-e4Xls1D8YWbGjgPB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85178958352-jtfend0uk2e809e15ildegpghmf18c4v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

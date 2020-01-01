@@ -171,14 +171,23 @@ public class FragmentSelectionList extends BaseFragment {
                     0,
                     mSelectionUtil.getString(SelectionUtil.KING_ID),
                     mSelectionUtil.getString(SelectionUtil.ATTRACTIVE_BOY_ID),
-                    mSelectionUtil.getString(SelectionUtil.INNOCENCE_BOY_ID)
+                    mSelectionUtil.getString(SelectionUtil.INNOCENCE_ID)
             );
-        } else {
+        } else if (type.equals(getStringResource(R.string.fragment_selection_list_queen)) ||
+                type.equals(getStringResource(R.string.fragment_selection_list_attractive_girl)) ||
+                type.equals(getStringResource(R.string.fragment_selection_list_innocence_girl))) {
             sLiveData = mAppDatabase.selectionDao().getOtherList(
                     1,
                     mSelectionUtil.getString(SelectionUtil.QUEEN_ID),
                     mSelectionUtil.getString(SelectionUtil.ATTRACTIVE_GIRL_ID),
-                    mSelectionUtil.getString(SelectionUtil.INNOCENCE_GIRL_ID)
+                    mSelectionUtil.getString(SelectionUtil.INNOCENCE_ID)
+            );
+        } else {
+            sLiveData = mAppDatabase.selectionDao().getInnocenceList(
+                    mSelectionUtil.getString(SelectionUtil.KING_ID),
+                    mSelectionUtil.getString(SelectionUtil.QUEEN_ID),
+                    mSelectionUtil.getString(SelectionUtil.ATTRACTIVE_BOY_ID),
+                    mSelectionUtil.getString(SelectionUtil.ATTRACTIVE_GIRL_ID)
             );
         }
         sLiveData.observe(this, selections -> {

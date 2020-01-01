@@ -1,21 +1,23 @@
 <resources>
-    <string name="app_name">UCS Tgo Voting</string>
+    <string name="app_name">Fresher Welcome | UCSTgo</string>
     <string name="action_clear_voting">Clear Voting</string>
     <string name="tv_king">King</string>
     <string name="tv_queen">Queen</string>
     <string name="tv_attractive_boy">Prince</string>
     <string name="tv_attractive_girl">Princess</string>
+    <string name="tv_innocence">Innocence</string>
     <string name="tv_innocence_boy">Innocence Boy</string>
     <string name="tv_innocence_girl">Innocence Girl</string>
 
-    <string name="fragment_home">UCS Tgo Voting</string>
+    <string name="fragment_home">@string/app_name</string>
     <string name="fragment_photo">Gallery</string>
-    <string name="fragment_selection_list_king">@string/tv_king<!--Selection--></string>
-    <string name="fragment_selection_list_queen">@string/tv_queen<!--Selection--></string>
-    <string name="fragment_selection_list_attractive_boy">@string/tv_attractive_boy<!--Selection--></string>
-    <string name="fragment_selection_list_attractive_girl">@string/tv_attractive_girl<!--Selection--></string>
-    <string name="fragment_selection_list_innocence_boy">@string/tv_innocence_boy<!--Selection--></string>
-    <string name="fragment_selection_list_innocence_girl">@string/tv_innocence_girl<!--Selection--></string>
+    <string name="fragment_selection_list_king">@string/tv_king</string>
+    <string name="fragment_selection_list_queen">@string/tv_queen</string>
+    <string name="fragment_selection_list_attractive_boy">@string/tv_attractive_boy</string>
+    <string name="fragment_selection_list_attractive_girl">@string/tv_attractive_girl</string>
+    <string name="fragment_selection_list_innocence">@string/tv_innocence</string>
+    <string name="fragment_selection_list_innocence_boy">@string/tv_innocence_boy</string>
+    <string name="fragment_selection_list_innocence_girl">@string/tv_innocence_girl</string>
     <string name="fragment_qr_title">QR</string>
 
     <string name="voting_dialog_title">Vote ပေးမှာသေချာပါသလား။</string>
@@ -65,8 +67,9 @@
         <item>@string/tv_queen</item>
         <item>@string/tv_attractive_boy</item>
         <item>@string/tv_attractive_girl</item>
-        <item>@string/tv_innocence_boy</item>
-        <item>@string/tv_innocence_girl</item>
+        <item>@string/tv_innocence</item>
+        <!--<item>@string/tv_innocence_boy</item>
+        <item>@string/tv_innocence_girl</item>-->
     </string-array>
 
     <string-array name="gender">

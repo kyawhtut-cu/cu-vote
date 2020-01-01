@@ -2,8 +2,6 @@ package com.kyawhtut.ucstgovotingadmin.utils.fonts;
 
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -11,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -106,24 +107,6 @@ public class MMFontUtils {
                         tv.setText(MMFontUtils.mmText(tv.getText().toString(), MMFontUtils.TEXT_UNICODE, true, true));
                     }
                 }
-            }
-        }
-    }
-
-    public static void applyMMFontToSnackBar(Snackbar snackbar) {
-        TextView tvMsgSnack = (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
-        if (tvMsgSnack != null) {
-            tvMsgSnack.setLineSpacing(1.2f, 1.2f);
-            if (!isSupportUnicode()) {
-                MMFontUtils.setMMFont(tvMsgSnack);
-
-                String msg = tvMsgSnack.getText().toString();
-                tvMsgSnack.setText(MMFontUtils.mmText(msg, MMFontUtils.TEXT_UNICODE, true, true));
-
-                /*
-                String msg = tvMsgSnack.getText().toString();
-                tvMsgSnack.setText(MMFontUtils.uni2zg(msg));
-                */
             }
         }
     }

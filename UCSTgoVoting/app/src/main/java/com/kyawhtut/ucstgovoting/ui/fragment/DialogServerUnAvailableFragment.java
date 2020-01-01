@@ -1,5 +1,6 @@
 package com.kyawhtut.ucstgovoting.ui.fragment;
 
+import android.content.DialogInterface;
 import android.widget.TextView;
 
 import com.kyawhtut.ucstgovoting.R;
@@ -14,16 +15,22 @@ public class DialogServerUnAvailableFragment extends DialogFragmentBlur {
     TextView mTvMessage;
 
     private String message;
+    private DialogServerUnAvailableClickListener mListener;
 
     public DialogFragmentBlur newInstance(int radius, float downScaleFactor, boolean dimming, boolean debug, String message) {
         this.message = message;
         return super.newInstance(radius, downScaleFactor, dimming, debug);
     }
 
+    public DialogServerUnAvailableFragment setListener(DialogServerUnAvailableClickListener listener) {
+        this.mListener = listener;
+        return this;
+    }
+
     @OnClick(R.id.btn_ok)
     public void onClickBtnOk() {
         if (mListener != null)
-            mListener.onDismiss(getDialog());
+            mListener.onClickOk(getDialog());
     }
 
     @Override
@@ -34,5 +41,9 @@ public class DialogServerUnAvailableFragment extends DialogFragmentBlur {
     @Override
     protected void prepareView() {
         mTvMessage.setText(FontUtils.getConvertedString(message));
+    }
+
+    public interface DialogServerUnAvailableClickListener {
+        void onClickOk(DialogInterface dialog);
     }
 }
