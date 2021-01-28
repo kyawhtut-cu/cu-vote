@@ -170,6 +170,9 @@ public class HomeActivity extends BaseActivity implements ZXingScannerView.Resul
         if (NetworkUtils.isOnline(this)) {
             try {
                 List<String> selectionId = Arrays.asList(result.getText().split("#"));
+                if (selectionId.size() == 5) {
+                    selectionId.add("");
+                }
                 if (selectionId.size() >= 6) {
                     mLoadingProgress.setVisibility(View.VISIBLE);
                     mDisposable.add(

@@ -197,9 +197,13 @@ public class FragmentSelectionList extends BaseFragment {
             }
             mRvAdapter.swipeData(selections);
             mSelectionCount.update(0, mOldPosition, mRvAdapter.getItemCount());
-            List<String> photo = new Gson().fromJson(selections.get(0).photo_col, new TypeToken<List<String>>() {
-            }.getType());
-            updateCurrentBackground((photo != null && photo.size() > 0) ? photo.get(0).replace("../", Utils.BASE_URL + Utils.PHOTO_RESOURCE) : "");
+            if (selections.size() != 0) {
+                List<String> photo = new Gson().fromJson(selections.get(0).photo_col, new TypeToken<List<String>>() {
+                }.getType());
+                updateCurrentBackground((photo != null && photo.size() > 0) ? photo.get(0).replace("../", Utils.BASE_URL + Utils.PHOTO_RESOURCE) : "");
+            } else {
+                updateCurrentBackground("");
+            }
         });
     }
 

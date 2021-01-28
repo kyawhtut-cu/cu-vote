@@ -3,7 +3,6 @@ package com.kyawhtut.ucstgovoting.ui.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -14,6 +13,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.kyawhtut.ucstgovoting.R;
 
@@ -72,7 +73,7 @@ public class ItemsCountView extends LinearLayout {
             textSwitcher.setInAnimation(createPositionAnimation(offset, 0, 0f, 1f, duration));
             textSwitcher.setOutAnimation(createPositionAnimation(0, -offset, 1f, 0f, duration));
         }
-        textSwitcher.setText(String.valueOf(newPosition + 1));
+        textSwitcher.setText(String.valueOf((totalElements == 0) ? 0 : newPosition + 1));
     }
 
     private Animation createPositionAnimation(int fromY, int toY, float fromAlpha, float toAlpha, int duration) {

@@ -102,7 +102,7 @@ public class SelectionDetailActivity extends BaseActivity {
 
         mCompositeDisposable = new CompositeDisposable();
 
-        Pattern mPattern = Pattern.compile("http:\\/\\/voting\\.kyawhtut\\.com\\/detail\\/(.*)", Pattern.CASE_INSENSITIVE);
+        Pattern mPattern = Pattern.compile("https:\\/\\/w*.*ucstaungoo\\.app\\/voting\\/detail\\/(.*)", Pattern.CASE_INSENSITIVE); //http:\/\/voting\.kyawhtut\.com\/detail\/(.*)
 
         Matcher matcher = mPattern.matcher(link);
 

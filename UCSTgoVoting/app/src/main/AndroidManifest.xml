@@ -58,7 +58,12 @@
 
                 <data
                     android:host="www.ucstaungoo.app"
-                    android:pathPattern="\/.*"
+                    android:pathPattern="\/voting\/"
+                    android:scheme="https" />
+
+                <data
+                    android:host="ucstaungoo.app"
+                    android:pathPattern="\/voting\/"
                     android:scheme="https" />
             </intent-filter>
         </activity>
@@ -85,13 +90,20 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="voting.kyawhtut.com"
-                    android:pathPattern="\/detail\/.*"
-                    android:scheme="http" />
+                    android:host="www.ucstaungoo.app"
+                    android:pathPattern="\/voting\/detail\/.*"
+                    android:scheme="https" />
+
+                <data
+                    android:host="ucstaungoo.app"
+                    android:pathPattern="\/voting\/detail\/.*"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
 
-        <service android:name=".utils.notification.VotingNotification">
+        <service
+            android:name=".utils.notification.VotingNotification"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

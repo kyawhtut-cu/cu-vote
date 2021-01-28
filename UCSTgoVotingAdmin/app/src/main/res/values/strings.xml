@@ -12,7 +12,7 @@
 
     <string name="connection_error">Connection error. Please try again.</string>
     <string name="try_again">Try Again</string>
-    <string name="voting_url">https://voting.kyawhtut.com/</string>
+    <string name="voting_url">https://ucstaungoo.app/voting</string>
     <string name="developer">Kyaw Htut</string>
     <string name="libraries">Libraries</string>
     <string name="report_bugs">Report Bugs</string>
